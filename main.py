@@ -2,10 +2,10 @@ from pyrogram import Client, filters
 import time
 
 # Telegram API ma'lumotlarini shu yerga qo'ying
-API_ID = "25503582"
-API_HASH = "9bc607b4792e8276afa98b757b62e11e"
-SESSION_NAME = "robotmee"
-TARGET_GROUP_ID = -4678022853  # Yuborilishi kerak bo'lgan guruh ID'si
+API_ID = "25028134"
+API_HASH = "14a0a4ae72166996fe6e9519ba3e417f"
+SESSION_NAME = "Hacker_RooBotMee"
+TARGET_GROUP_ID = -2454683003  # Yuborilishi kerak bo'lgan guruh ID'si
 
 app = Client(SESSION_NAME, api_id=API_ID, api_hash=API_HASH)
 
