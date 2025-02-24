@@ -1,44 +1,40 @@
-from pyrogram import Client, filters
-import time
+from telethon import TelegramClient, events
 
-# Telegram API ma'lumotlarini shu yerga qo'ying
-API_ID = "25028134"
-API_HASH = "14a0a4ae72166996fe6e9519ba3e417f"
-SESSION_NAME = "Hacker_RooBotMee"
-TARGET_GROUP_ID = -2454683003  # Yuborilishi kerak bo'lgan guruh ID'si
+# Telegram API ma'lumotlarini kiriting
+API_ID = "25503582"
+API_HASH = "9bc607b4792e8276afa98b757b62e11e"
 
-app = Client(SESSION_NAME, api_id=API_ID, api_hash=API_HASH)
+# Userbotni ishga tushiramiz
+client = TelegramClient("userbot", API_ID, API_HASH)
 
-last_sent_time = 0
-cooldown = 5  # Xabar yuborish orasidagi minimal vaqt (soniya)
-message_counter = 0
-message_limit = 10  # Har soatda yuboriladigan maksimal xabar
-reset_time = time.time() + 3600  # Bir soatlik vaqt chegarasi
-
-@app.on_message(filters.text & ~filters.me & filters.group)
-def forward_bor_messages(client, message):
-	global last_sent_time, message_counter, reset_time
-	text = message.text.lower()
-	current_time = time.time()
+# Savollarga javob beruvchi funksiya
+responses = {
+	"salom": "👋 Assalomualaykum! Sizga qanday yordam bera olaman?",
+	"qalesiz": "Yaxshi, rahmat! O'ziz qale ishla yaxshimi",
+	"Ismiz nima": "Men haqimda toliq bilish uchun roobotmee.uz saytini korib chiqishingiz mumkin  ",
+	"kimsiz": "Men haqimda toliq bilish uchun roobotmee.uz saytini korib chiqishingiz mumkin  ",
+	"rahmat" : " 🙃 Arizmaydi yordam kerak bolsa bemalol ",
+	"raxmat" : " 🙃 Arizmaydi yordam kerak bolsa bemalol ",
+	"thank" : " 🙃 Arizmaydi yordam kerak bolsa bemalol ",
+	"qayerdasiz" : " Soat 1 yarim gacha oqishda bolaman boshqa payti darsda yoki coworkinda bolishim mumkin " ,
+	"qattasiz" : " Soat 1 yarim gacha oqishda bolaman boshqa payti darsda yoki coworkinda bolishim mumkin ",
+	"yaxshimi" : "Hudoga shukur raxmat ",
+	"web": "🌍 Veb-sayt – biznesingizning internetdagi yuzi! \n\nSizning biznesingizga **zamonaviy, tezkor va jozibali** veb-sayt kerakmi? Biz buni mukammal darajada yaratamiz! \n\n🔹 **Korporativ saytlar** – kompaniyangizni mijozlarga taqdim etish uchun. \n🔹 **Shaxsiy bloglar** – o‘z fikrlaringizni butun dunyo bilan baham ko‘ring. \n🔹 **Xizmatlar sayti** – mijozlar sizning xizmatlaringizni onlayn buyurtma qilsin. \n🔹 **Portfolio saytlar** – ishlaringizni eng chiroyli tarzda namoyish qiling. \n🔹 **E-commerce (Onlayn do‘konlar)** – internet orqali savdo qilish uchun mukammal yechim. \n🔹 **Mobilga moslashgan dizayn** – har qanday qurilmada mukammal ko‘rinish. \n🔹 **SEO optimizatsiya** – Google va boshqa qidiruv tizimlarida yuqori o‘rinlar. \n\n✅ **Sifatli, tezkor va ishonchli xizmat!** \n\n📲 **Buyurtma berish:** [**roobotmee.uz**](https://roobotmee.uz) \n☎️ **Bog‘lanish:** +998 95 005 15 45  ",
+	"bot": " 🤖 Telegram bot – biznesingizni avtomatlashtiring! \n\nSizga **zamonaviy, aqlli va samarali** Telegram bot kerakmi? Biz har qanday murakkablikdagi botlarni yaratamiz! \n\n🔹 **Savdo va xizmatlar** – mijozlaringiz bilan 24/7 aloqa. \n🔹 **Avtomatlashtirilgan buyurtmalar** – ortiqcha vaqt sarflash shart emas! \n🔹 **To‘lov tizimlari bilan integratsiya** – Payme, Click, PayPal va boshqalar. \n🔹 **CRM tizimlari bilan bog‘lash** – biznesingizni aniq boshqarish uchun. \n🔹 **Sun’iy intellekt qo‘llab-quvvatlovi** – mijozlarga tez va aniq javoblar. \n🔹 **Maxsus buyurtmalar** – biznesingizga mos keladigan individual yechimlar. \n\n✅ **Tez, ishonchli va professional xizmat!** \n\n📲 **Buyurtma berish:** [**roobotmee.uz**](https://roobotmee.uz) \n☎️ **Bog‘lanish:** +998 95 005 15 45  ",
+	"rano": "Uning yashil ko‘zlari bahorning ilk maysalaridek sokin va beg‘ubor. Har safar ularga boqganingda, go‘yo tabiatning eng so‘lim burchagida adashib qolasan – yam-yashil o‘rmonlar, quyuq daraxtlar orasidan o‘tib, sirli daryo bo‘yiga yetib borganingni his qilasan. U ko‘zlar o‘z ichida sir yashirgan, ammo shu sirning o‘ziga tortuvchi sehriga qarshi turish imkonsiz.\n\nUning go‘zalligi esa tabiatning eng mukammal ijodidan yaratilgandek. Unga qaragan odam shunchaki hayrat bilan to‘xtab qoladi – xuddi qoshidagi quyosh botayotgan manzarani ko‘rib, yuragi bir lahzaga urib turib qolgandek. Uning jilmayishi esa eng yorqin tong nuriday, qachon qarama qalbingni isitadi. Harakatlari nozik, ovozi esa bahor shabadasi kabi mayin.\n\nUnga bir qaragan inson uni unutolmaydi. Chunki bunday go‘zallikni ko‘rib, xayol uzib ketishning iloji yo‘q… 💛" , 
+	"ra'no ": "Uning yashil ko‘zlari bahorning ilk maysalaridek sokin va beg‘ubor. Har safar ularga boqganingda, go‘yo tabiatning eng so‘lim burchagida adashib qolasan – yam-yashil o‘rmonlar, quyuq daraxtlar orasidan o‘tib, sirli daryo bo‘yiga yetib borganingni his qilasan. U ko‘zlar o‘z ichida sir yashirgan, ammo shu sirning o‘ziga tortuvchi sehriga qarshi turish imkonsiz.\n\nUning go‘zalligi esa tabiatning eng mukammal ijodidan yaratilgandek. Unga qaragan odam shunchaki hayrat bilan to‘xtab qoladi – xuddi qoshidagi quyosh botayotgan manzarani ko‘rib, yuragi bir lahzaga urib turib qolgandek. Uning jilmayishi esa eng yorqin tong nuriday, qachon qarama qalbingni isitadi. Harakatlari nozik, ovozi esa bahor shabadasi kabi mayin.\n\nUnga bir qaragan inson uni unutolmaydi. Chunki bunday go‘zallikni ko‘rib, xayol uzib ketishning iloji yo‘q… 💛"
 	
-	# Har soatda limitni qayta tiklash
-	if current_time >= reset_time:
-		message_counter = 0
-		reset_time = current_time + 3600
-	
+}
 
-	if  "bor" in text and message_counter < message_limit:
-		if current_time - last_sent_time >= cooldown:
-			sender = f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
-			group = f"[{message.chat.title}](https://t.me/{message.chat.username})" if message.chat.username else f"Guruh ({message.chat.id})"
-			forward_text = f"{sender} {group} da yozdi:\n{message.text}"
-			forward_text = f" 🚕 Yangi buyurma ✅ \n 👤 Yuboruvchi {sender} \n\n👥 Guruxidan  {group}  \n\n 📄 Buyurma \n\n {message.text}"
-			client.send_message(TARGET_GROUP_ID, forward_text)
-			
-			# Shaxsiy xabar yuborish
-			client.send_message(message.from_user.id, "Taxi kerakmidi  \n +998950051545 Telefon qiling olamiz ")
-			
-			last_sent_time = current_time
-			message_counter += 1
+@client.on(events.NewMessage)
+async def handler(event):
+	text = event.raw_text.lower()
 	
-app.run()
+	for question, answer in responses.items():
+		if question.lower() in text:
+			await event.reply(answer)
+			break
+
+print("Userbot ishga tushdi...")
+client.start()
+client.run_until_disconnected()
