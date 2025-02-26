@@ -11,7 +11,7 @@ client = TelegramClient("userbot", API_ID, API_HASH)
 async def update_nickname():
     while True:
         now = datetime.utcnow() + timedelta(hours=5, minutes=1)  # 5 soat 1 minut qo‘shildi
-        new_name = f"𝐄𝐭𝐡𝐢𝐜𝐚𝐥 𝐑𝐨𝐨𝐁𝐨𝐭 |  {now.strftime('%H:%M') | }"
+        new_name = f"𝐄𝐭𝐡𝐢𝐜𝐚𝐥 𝐑𝐨𝐨𝐁𝐨𝐭 |  {now.strftime('%H:%M')} | "
         try:
             await client(UpdateProfileRequest(first_name=new_name))
             print(f"Nik yangilandi: {new_name}")
