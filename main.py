@@ -11,7 +11,7 @@ client = TelegramClient("userbot", API_ID, API_HASH)
 async def update_nickname():
     while True:
         now = datetime.utcnow() + timedelta(hours=5, minutes=1)  # 5 soat 1 minut qo‘shildi
-        new_name = f"𝐄𝐭𝐡𝐢𝐜𝐚𝐥 𝐑𝐨𝐨𝐁𝐨𝐭 |  {now.strftime('%H:%M')} | "
+        new_name = f"𝐄𝐭𝐡𝐢𝐜𝐚𝐥 𝐑𝐨𝐨𝐁𝐨𝐭 | {now.strftime('%H:%M')} | "
         try:
             await client(UpdateProfileRequest(first_name=new_name))
             print(f"Nik yangilandi: {new_name}")
@@ -29,21 +29,23 @@ responses = {
     "alo": "Men hozir online emasman. Savolingiz bo'lsa, yozib qoldiring.",
     "loyha": "Loyihalarim bilan tanishmoqchi bo'lsangiz, portfolio saytimga kiring: roobotmee.uz",
     "rahmat": "Arzimaydi! Yana savollaringiz bo‘lsa, bemalol so‘rang.",
-    "bot": " 🤖 Telegram bot – biznesingizni avtomatlashtiring!...",
-    "web": " 🌍 Veb-sayt – biznesingizning internetdagi yuzi!..."
+    "bot": "### 🤖 Telegram bot – biznesingizni avtomatlashtiring!...",
+    "web": "### 🌍 Veb-sayt – biznesingizning internetdagi yuzi!..."
 }
 
 @client.on(events.NewMessage)
 async def message_handler(event):
-    text = event.raw_text.lower()
-    for question, answer in responses.items():
-        if question in text:
-            await event.reply(answer)
-            break
+    if event.is_private:  # Faqat shaxsiy xabarlarga javob berish
+        text = event.raw_text.lower()
+        for question, answer in responses.items():
+            if question in text:
+                await event.reply(answer)
+                break
 
 @client.on(events.NewMessage(pattern="/start"))
 async def start_handler(event):
-    await event.reply("Bot ishga tushdi!")
+    if event.is_private:
+        await event.reply("Bot ishga tushdi!")
 
 print("Userbot ishga tushdi...")
 
