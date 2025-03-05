@@ -20,10 +20,10 @@ Userbotdan foydalanish uchun quyidagi talablar bajarilishi kerak:
    API_ID = "YOUR_API_ID"
    API_HASH = "YOUR_API_HASH"
    ```
-4. `userbot.py` faylini yuklab oling va API ma'lumotlarini joylang.
+4. `main.py` faylini yuklab oling va API ma'lumotlarini joylang.
 5. Skriptni ishga tushiring:
    ```sh
-   python userbot.py
+   python main.py
    ```
 
 ## Asosiy Funksiyalar
