@@ -1,55 +1,47 @@
-# Telegram Userbot
+# Userbot uchun qo'llanma
 
-Bu userbot **Telethon** kutubxonasi yordamida yozilgan bo'lib, Telegram'dagi xabarlarga avtomatik javob berish imkoniyatini taqdim etadi.
+## Kirish
+Ushbu userbot Telegram akkauntingiz orqali avtomatlashtirilgan xabarlar jo'natish, foydalanuvchi so'rovlariga javob berish va profil ismingizni dinamik tarzda yangilash imkonini beradi. U `Telethon` kutubxonasidan foydalanadi.
+
+## Talablar
+Userbotdan foydalanish uchun quyidagi talablar bajarilishi kerak:
+- Python 3.7 yoki undan yuqori versiya
+- `telethon` kutubxonasi (`pip install telethon`)
+- Telegram API ma'lumotlari (`API_ID` va `API_HASH`)
 
 ## O'rnatish
-
-1. **Telethon** kutubxonasini o'rnating:
-   ```bash
+1. Python va kerakli kutubxonalarni o'rnating:
+   ```sh
    pip install telethon
    ```
-2. **API_ID** va **API_HASH** olish uchun [my.telegram.org](https://my.telegram.org/) saytida ro'yxatdan o'ting.
-
-3. **`config.py`** faylini yarating va quyidagilarni kiriting:
-   ```python
-   API_ID = "YOUR_API_ID"
-   API_HASH = "YOUR_API_HASH"
-   ```
-
-## Ishga tushirish
-
-1. **Userbot'ni ishga tushirish**
-   ```bash
+2. Telegram API uchun [my.telegram.org](https://my.telegram.org/apps) sahifasidan `API_ID` va `API_HASH` oling.
+3. `userbot.py` faylini yuklab oling va API ma'lumotlarini joylang.
+4. Skriptni ishga tushiring:
+   ```sh
    python userbot.py
    ```
-2. **Userbot muvaffaqiyatli ishga tushganini tekshirish**
-   Terminalda quyidagi xabar chiqadi:
-   ```
-   Userbot ishga tushdi...
-   ```
 
-## Funksiyalar
-- **Oddiy savollarga avtomatik javob berish**
-- **Reklama va xizmat takliflarini javob sifatida yuborish**
-- **Har qanday yozilgan matnni tekshirib, mos javob qaytarish**
+## Asosiy Funksiyalar
+### Profil ismini dinamik yangilash
+- Har bir daqiqada bot profil ismini hozirgi vaqtga moslab o'zgartiradi.
 
-## Foydalanish
-Botga quyidagi so‘zlardan biri yozilsa, avtomatik javob qaytariladi:
+### Xabarlarni avtomatik javoblash
+- Foydalanuvchining yozgan so'zlari bo'yicha javob beradi.
+- So'rovlar ro‘yxati `responses` lug‘atida keltirilgan.
 
-| Xabar       | Javob |
-|-------------|---------------------------------------------------------------|
-| salom       | Assalomualaykum! Sizga qanday yordam bera olaman? |
-| qalesiz     | Yaxshi, rahmat! Sizda qanday yangiliklar? |
-| ismingiz nima | Men oddiy Telegram userbotman. |
-| bot         | Telegram botlar yaratish haqida ma'lumot beradi |
-| web         | Veb-sayt yaratish haqida ma'lumot beradi |
-| bormi       | Maxsus javob beradi |
+### Buyruqlar
+| Buyruq | Tavsif |
+|--------|---------|
+| `/start` | Bot ishga tushganligini tasdiqlovchi xabar yuboradi. |
+| `/del` | So‘nggi xabarlarni o‘chirish uchun ishlatiladi. |
 
-## Mualliflik Huquqi
-Bu kod [Hayotbek Ismoilov](https://github.com/roobotmee) tomonidan yozilgan va barcha huquqlar himoyalangan. Koddan foydalanish va tarqatish faqat muallif ruxsati bilan amalga oshirilishi mumkin.
+## Muammolarni hal qilish
+- Agar bot ishlamasa, `API_ID` va `API_HASH` ning to‘g‘ri ekanligini tekshiring.
+- Internet ulanishi va `Telethon` kutubxonasi o‘rnatilganligini tekshiring.
+- Agar `Too Many Requests` xatosi yuz bersa, biroz vaqt kutib, qayta urinib ko‘ring.
 
 ## Aloqa
-Agar savollaringiz bo‘lsa yoki yordam kerak bo‘lsa, quyidagi manzilga murojaat qiling:
-📩 Email: kh.ismoiloff@gmail.com
-📞 Telefon: +998 95 005 15 45 
+Qo‘shimcha savollar va muammolar uchun:
+- Telegram: [@roobotmee](https://t.me/roobotmee)
+- Veb-sayt: [roobotmee.uz](https://roobotmee.uz)
 
