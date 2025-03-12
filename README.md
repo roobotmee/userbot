@@ -1,69 +1,52 @@
-# Userbot uchun qo'llanma
+# Telegram Media Bot - Video Yuklab Olish va Musiqa Qidirish
 
-## Kirish
-Ushbu userbot Telegram akkauntingiz orqali avtomatlashtirilgan xabarlar jo'natish, foydalanuvchi so'rovlariga javob berish va profil ismingizni dinamik tarzda yangilash imkonini beradi. U `Telethon` kutubxonasidan foydalanadi.
+**Muallif**: Ismoilov Hayotbek  
+**Shaxsiy Veb-sayt**: [roobotmee.uz](https://roobotmee.uz)  
+**Telegram**: [t.me/roobotmee](https://t.me/roobotmee)
 
-## Talablar
-Userbotdan foydalanish uchun quyidagi talablar bajarilishi kerak:
-- Python 3.7 yoki undan yuqori versiya
-- `telethon` kutubxonasi (`pip install telethon`)
-- Telegram API ma'lumotlari (`API_ID` va `API_HASH`)
+---
 
-## O'rnatish
-1. Python va kerakli kutubxonalarni o'rnating:
-   ```sh
-   pip install telethon
-   ```
-2. Telegram API uchun [my.telegram.org](https://my.telegram.org/apps) sahifasidan `API_ID` va `API_HASH` oling.
-3. `config.py` faylini yarating va quyidagilarni kiriting:
-   ```python
-   API_ID = "YOUR_API_ID"
-   API_HASH = "YOUR_API_HASH"
-   ```
-4. `main.py` faylini yuklab oling va API ma'lumotlarini joylang.
-5. Skriptni ishga tushiring:
-   ```sh
-   python main.py
-   ```
+### Loyihaning Ta'rifi
 
-## Asosiy Funksiyalar
-### Profil ismini dinamik yangilash
-- Har bir daqiqada bot profil ismini hozirgi vaqtga moslab o'zgartiradi.
+Ushbu Telegram bot, foydalanuvchilarga ijtimoiy tarmoqlardan (YouTube, Instagram, TikTok, Snapchat) video yuklab olish va musiqa qidirish imkoniyatini beradi. Bot barcha foydalanuvchi interfeysi (xabarlar, tugmalar, va boshqalar) Uzbek tilida bo'ladi.
 
-### Xabarlarni avtomatik javoblash
-- Foydalanuvchining yozgan so'zlari bo'yicha javob beradi.
-- So'rovlar ro‘yxati `responses` lug‘atida keltirilgan.
+### Loyihaning Asosiy Xususiyatlari
 
-### Buyruqlar
-| Buyruq | Tavsif |
-|--------|---------|
-| `/start` | Bot ishga tushganligini tasdiqlovchi xabar yuboradi. |
-| `/del` | So‘nggi xabarlarni o‘chirish uchun ishlatiladi. |
+1. **Video Yuklab Olish**: Foydalanuvchilar YouTube, Instagram, TikTok va Snapchat platformalaridan video yuklab olishlari mumkin.
+2. **Musiqa Qidirish**: Foydalanuvchilar musiqa nomini yozib yoki ovozli xabar yuborib musiqa qidirishlari mumkin.
+3. **Admin Paneli**: Administratorslar statistikani ko'rishlari, reklama yuborishlari va kanal obunalarini boshqarishlari mumkin.
 
-## Foydalanish
-Botga quyidagi so‘zlardan biri yozilsa, avtomatik javob qaytariladi:
+### Texnik Xususiyatlar
 
-| Xabar       | Javob |
-|-------------|---------------------------------------------------------------|
-| salom       | Assalomualaykum! Sizga qanday yordam bera olaman? |
-| qalesiz     | Yaxshi, rahmat! Sizda qanday yangiliklar? |
-| ismingiz nima | Men oddiy Telegram userbotman. |
-| bot         | Telegram botlar yaratish haqida ma'lumot beradi |
-| web         | Veb-sayt yaratish haqida ma'lumot beradi |
-| bormi       | Maxsus javob beradi |
+- **Asinxron Arxitektura**: Bot Python `asyncio` kutubxonasi yordamida asinxron ishlaydi, bu esa botning samaradorligini oshiradi.
+- **Ma'lumotlar Bazasi**: SQLAlchemy ORM yordamida SQLite yoki PostgreSQL bilan ma'lumotlar bazasini boshqarish.
+- **API Integratsiyasi**: Video yuklash va musiqa tanib olish uchun turli tashqi API'lar bilan integratsiya.
+- **Lokalizatsiya**: Foydalanuvchi interfeysi faqat Uzbek tilida, foydalanuvchilar uchun qulaylik yaratish.
 
-## Muammolarni hal qilish
-- Agar bot ishlamasa, `API_ID` va `API_HASH` ning to‘g‘ri ekanligini tekshiring.
-- Internet ulanishi va `Telethon` kutubxonasi o‘rnatilganligini tekshiring.
-- Agar `Too Many Requests` xatosi yuz bersa, biroz vaqt kutib, qayta urinib ko‘ring.
+### Loyihani Ishga Tushirish
 
-## Mualliflik Huquqi
-Bu kod [Hayotbek Ismoilov](https://roobotmee.uz) tomonidan yozilgan va barcha huquqlar himoyalangan. Koddan foydalanish va tarqatish faqat muallif ruxsati bilan amalga oshirilishi mumkin.
+1. **Muhitni Sozlash**:
+    - `.env` faylini yarating va unda quyidagi parametrlarni sozlang: `BOT_TOKEN`, `DATABASE_URL` va boshqa kerakli sozlamalar.
+    - Bog'lanish uchun `pip install -r requirements.txt` komandasini bajarib, barcha kerakli kutubxonalarni o'rnating.
 
-## Aloqa
-Agar savollaringiz bo‘lsa yoki yordam kerak bo‘lsa, quyidagi manzilga murojaat qiling:
-📩 Email: kh.ismoiloff@gmail.com
-📞 Telefon: +998 95 005 15 45
+2. **Ma'lumotlar Bazasi**:
+    - Bot ishga tushganida, ma'lumotlar bazasi avtomatik tarzda yaratilib, dastlabki ma'lumotlar yuklanadi.
+
+3. **Botni Ishga Tushirish**:
+    - Botni ishga tushirish uchun `python main.py` komandasini bajarish kerak.
+
+### Xavfsizlik Choralar
+
+1. **Autentifikatsiya**: Faqat ruxsat etilgan foydalanuvchilar botning barcha funksiyalariga kirish huquqiga ega bo'ladi.
+2. **Ma'lumotlarni Himoya Qilish**: Foydalanuvchi ma'lumotlari xavfsiz tarzda ma'lumotlar bazasida saqlanadi.
+3. **Huquqiy Asoslar**: Kontentni yuklab olishda mualliflik huquqi va qonunlarga amal qilish kerak.
+
+### Loyihani Rivojlantirish
+
+Ushbu loyiha yaxshi asosga ega va kerakli barcha funksiyalarni o'z ichiga oladi. Keyinchalik qo'shimcha xususiyatlar qo'shilishi mumkin.
+
+---
+
+**Loyiha haqida ko'proq ma'lumot uchun bog'lanish**:
+- [roobotmee.uz](https://roobotmee.uz)
 - Telegram: [@roobotmee](https://t.me/roobotmee)
-- Veb-sayt: [roobotmee.uz](https://roobotmee.uz)
-
